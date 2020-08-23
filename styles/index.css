@@ -1,0 +1,79 @@
+
+@keyframes glow_err {
+    0% {background-color: #ffbac8;}
+    100% {background-color: #ed859a;}
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: lora;
+    text-align: center;
+    background-color: #dedede;
+    /* font-weight: bolder; */
+}
+
+#page_title {
+    padding: 20px;
+    text-decoration: underline;
+}
+
+.descript_title {
+    text-decoration: underline;
+    font-weight: bolder;
+    font-size: 120%;
+    margin: 10px;
+}
+
+.selected_subjects {
+    background-color: #ffc9d4;
+    color: #000;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid #e81a43;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+#routine_table_container {
+    width: 100%;
+    /* overflow: scroll; */
+}
+
+#add_subject_selection {
+
+    font-size: 170%;
+    width: 50%;
+    font-weight: bolder;
+    padding: 15px;
+    text-align: center;
+}
+
+td{
+    padding: 10px;
+    font-weight: bold;
+    border: solid;
+    width: 10%;
+    min-width: 10%;
+    height: 20px;
+    overflow: hidden;
+    height: 50px;
+}
+
+td.multiple_subjects{
+    padding: 10px;
+    border: solid;
+    font-weight: bolder;
+    width: 10%;
+    height: 20px;
+
+    background-color: #ff94a9;
+    color: #630316;
+    animation: glow_err 2s ease-in-out 0s infinite alternate;
+}
+
+#tutorial {
+    font-size: 60%;
+}

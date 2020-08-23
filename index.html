@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		IITP Routine
+	</title>
+	<link href="styles/index.css" type="text/css" rel="stylesheet" />
+	<link rel="icon" href="res/favicon.ico">
+</head>
+
+
+<body>
+
+    <h1 id="page_title">
+        IIT Patna M.Tech. Routine Maker
+    </h1>
+
+    <div id="selection_screen">
+        <div id= "selected_subjects_container">
+            <div class="descript_title">
+                Selected subjects (click to remove)
+            </div>
+            <div id= "selected_subjects"></div>
+        </div> <br />
+
+        <div id="new_select">
+            <div class="descript_title">
+                Add a Subject
+            </div>
+            <select name="add_subject" id="add_subject_selection">
+                <option disabled selected="selected"> Choose a Subject </option>
+            </select>
+        </div>
+    </div>
+
+    <br />
+    <div id= "routine_table_container"></div>
+
+    <div id="tutorial">
+        <div class="descript_title">
+            How to use-
+        </div>
+            <ul>
+                <li>Select subjects you choosed in this sem and It should create a routine.</li>
+                <li>Routine is based on shared pdf from the institude.</li>
+                <li>To remove a subject, click on the subject code in selected subjects. </li>
+                <li>The page can be shared or bookmarked. All the selected subjects will be saved in the url.</li>
+            </ul>  
+        
+    </div>
+
+
+</body>
+<script type="text/javascript" src="script/routine_data.js"></script>
+<script type="text/javascript" src="script/index.js"></script>
+</html>
