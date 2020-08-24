@@ -239,9 +239,7 @@ window.addEventListener('load', (e)=> {
         }
     })
 
-    if(subs_arr.length>0) {
-        render_everything();
-    }
+    render_everything();
     
 })
 
