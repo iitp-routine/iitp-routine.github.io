@@ -36,9 +36,6 @@ function add_available_subjects_to_selection() {
 
 
 
-
-
-
 function render_selected_subjects() {
 
     let selected_subjects_div= document.getElementById("selected_subjects");
@@ -108,16 +105,20 @@ function render_new_routine(routine_array) {
             let subjects_name_this_hour= "";
             
             let all_subjects_now= routine_array[i][j];
+            let subject_code_this_hour="";
             all_subjects_now.forEach(subject_code => {
                 if(no_of_subs_this_hour > 0) {
                     subjects_name_this_hour+=',';
                 }
+                subject_code_this_hour= subject_code;
                 subjects_name_this_hour+=`&nbsp;${subject_code}&nbsp;`;
                 no_of_subs_this_hour++;
             })
 
-            if(no_of_subs_this_hour<2) {
-                table_str+= `<td>${subjects_name_this_hour}</td>`;
+            if(no_of_subs_this_hour == 0) {
+                table_str+= `<td></td>`;
+            } else if(no_of_subs_this_hour == 1) {
+                table_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code_this_hour)}">${subjects_name_this_hour}</td>`;
             } else {
                 table_str+= `<td class="multiple_subjects">${subjects_name_this_hour}</td>`;
             }
@@ -243,3 +244,4 @@ window.addEventListener('load', (e)=> {
     }
     
 })
+

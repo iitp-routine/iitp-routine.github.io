@@ -1,7 +1,12 @@
 
 @keyframes glow_err {
-    0% {background-color: #ffbac8;}
-    100% {background-color: #ed859a;}
+    0% {background-color: #f06f59; border-color: #0a4ac9; border-radius: 2px;}
+    100% {background-color: #cf3862; border-color: #c30ac9; border-radius: 10px;}
+}
+
+@font-face {
+    font-family: terminal;
+    src: url('./../res/terminal_bold.ttf');
 }
 
 * {
@@ -10,7 +15,7 @@
     padding: 0px;
     font-family: lora;
     text-align: center;
-    background-color: #dedede;
+    background-color: #efefef;
     /* font-weight: bolder; */
 }
 
@@ -51,29 +56,96 @@
     text-align: center;
 }
 
-td{
+option {
+    padding: 15px;
+}
+
+td {
     padding: 10px;
     font-weight: bold;
     border: solid;
+    border-width: 2px;
     width: 10%;
     min-width: 10%;
     height: 20px;
     overflow: hidden;
     height: 50px;
+    background-color: #dedede;
+    font-family: terminal;
+}
+
+td.pallet_0 {
+    background-color: #cfffe8;
+}
+td.pallet_1 {
+    background-color: #e9ffcf;
+}
+td.pallet_2 {
+    background-color: #ffdfc9;
+}
+td.pallet_3 {
+    background-color: #c7effc;
+}
+td.pallet_4 {
+    background-color: #c7cafc;
+}
+td.pallet_5 {
+    background-color: #ffc2df;
+}
+td.pallet_6 {
+    background-color: #ffbdf9;
+}
+td.pallet_7 {
+    background-color: #c3bdff;
+}
+td.pallet_8 {
+    background-color: #9effad;
+}
+td.pallet_9 {
+    background-color: #faff9e;
+}
+td.pallet_10 {
+    background-color: #ff9ca9;
+}
+td.pallet_11 {
+    background-color: #f292f7;
+}
+td.pallet_12 {
+    background-color: #89fa93;
+}
+td.pallet_13 {
+    background-color: #fcab8d;
+}
+td.pallet_14 {
+    background-color: #ff8c8c;
+}
+td.pallet_15 {
+    background-color: #849efa;
+}
+td.pallet_16 {
+    background-color: #b682fa;
+}
+td.pallet_17 {
+    background-color: #82fa9e;
+}
+td.pallet_18 {
+    background-color: #f78393;
+}
+td.pallet_19 {
+    background-color: #f5c47f;
 }
 
 td.multiple_subjects{
-    padding: 10px;
-    border: solid;
-    font-weight: bolder;
-    width: 10%;
-    height: 20px;
+
 
     background-color: #ff94a9;
-    color: #630316;
+    color: #fff;
     animation: glow_err 2s ease-in-out 0s infinite alternate;
 }
 
 #tutorial {
     font-size: 60%;
+}
+a {
+    text-decoration: none;
 }
