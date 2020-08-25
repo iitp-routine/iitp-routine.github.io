@@ -136,7 +136,7 @@ function render_new_routine(routine_array) {
 
 
 function render_routine_details() {
-    let table_str= `<tr><th class="details_th">Subject Code</th><th class="details_th">Subject Name</th></tr>`;
+    let table_str= `<tr><th class="details_th">Subject Code</th><th class="details_th">Subject Name</th><th class="details_th">Teacher</th></tr>`;
     let total_subs_details_found= 0;
     selected_subjects.forEach((subject_code => {
         if(COURSE_NAMES[subject_code]) {
@@ -144,7 +144,23 @@ function render_routine_details() {
 
             let new_str= `<tr>`;
             new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_code details_td">${subject_code}</td>`;
-            new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_name details_td">${COURSE_NAMES[subject_code].name}</td>`;
+
+            if(COURSE_NAMES[subject_code].name) {
+                new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_name_${total_subs_details_found%2==0?"even":"odd"} details_td">${COURSE_NAMES[subject_code].name}</td>`;
+            } else {
+                new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_name_${total_subs_details_found%2==0?"even":"odd"} details_td"></td>`;
+            }
+
+            if(COURSE_NAMES[subject_code].teacher_name) {
+                if(COURSE_NAMES[subject_code].teacher_email) {
+                    new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td"><a class="teacher_mail" href="mailto:${COURSE_NAMES[subject_code].teacher_email}">${COURSE_NAMES[subject_code].teacher_name}</a></td>`;
+                } else {
+                    new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td">${COURSE_NAMES[subject_code].teacher_name}</td>`;
+                }
+            } else {
+                new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td"></td>`;
+            }
+            
             new_str+= `</tr>`;
 
             table_str+= new_str;

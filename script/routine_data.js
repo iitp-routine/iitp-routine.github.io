@@ -87,32 +87,63 @@ const ROUTINE= {
 }
 
 
+
+
+
 const COURSE_NAMES= {
     CS541: {
         name: `Foundations of Computer systems`,
+        teacher_name: `Dr. Suman Kumar Maji`,
+        teacher_email: `smaji@iitp.ac.in`,
     },
     MA501: {
         name: `Probablity Statistics and Stochastic process`,
+        teacher_name: `Dr.  Yogesh Mani Tripathi`,
+        teacher_email: `yogesh@iitp.ac.in`,
+    },
+    HS513: {
+        name:`Humanities & Social science`,
+        teacher_name: `Dr. Smriti Singh`,
+        teacher_email: `smriti@iitp.ac.in`,
     },
     CS559: {
         name: `Computer systems lab - 1`,
+        teacher_name: `Dr. Suman Kumar Maji`,
+        teacher_email: `smaji@iitp.ac.in`,
     },
     CS544: {
         name: `Introduction to Network science`,
+        teacher_name: `Dr. Joydeep Chandra`,
+        teacher_email: `joydeep@iitp.ac.in`,
     },
     CS547: {
         name: `Foundation of Computer security`,
+        teacher_name: `Dr. Somanath Tripathy`,
+        teacher_email: `som@iitp.ac.in`,
     },
     CS555: {
         name: `Big data computing`,
+        teacher_name: `Dr. Rajiv Misra`,
+        teacher_email: `rajivm@iitp.ac.in`,
     },
     CS561: {
         name: `Artificial Intelligence`,
+        teacher_name: `Dr. Asif Ekbal`,
+        teacher_email: `asif@iitp.ac.in`,
+    },
+    CS571: {
+        name: `Artificial Intelligence & Lab`,
+        teacher_name: `Dr. Asif Ekbal`,
+        teacher_email: `asif@iitp.ac.in`,
     },
     CS564: {
         name: `Foundation of Machine Learning`,
+        teacher_name: `Dr. Sriparna Saha`,
+        teacher_email: `sriparna@iitp.ac.in`,
     },
     CS577: {
         name: `Introduction to Blockchain and Cryptocurrency`,
+        teacher_name: `Dr. Raju Halder`,
+        teacher_email: `halder@iitp.ac.in`,
     },
 }

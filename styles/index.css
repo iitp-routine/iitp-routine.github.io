@@ -14,9 +14,11 @@
     margin: 0px;
     padding: 0px;
     font-family: lora;
-    text-align: center;
+    text-align: center;/
+}
+
+body {
     background-color: #efefef;
-    /* font-weight: bolder; */
 }
 
 #page_title {
@@ -56,8 +58,11 @@
     text-align: center;
 }
 
-option {
+option, select {
     padding: 15px;
+    background-color: #efefef;
+    border: solid;
+    border-radius: 5px;
 }
 
 td.sub {
@@ -147,16 +152,27 @@ td.multiple_subjects{
 td.details_td {
     padding: 5px 10px;
     border: 1px solid;
-
 }
 td.details_sub_code {
     font-family: terminal;
     padding-left: 20px;
     padding-right: 20px;
 }
-td.details_sub_name {
+td.details_sub_name_even {
     font-weight: bold;
-    background-color: #dedede;
+    background-color: #ececec;
+}
+td.details_sub_name_odd {
+    font-weight: bold;
+    background-color: #cdcdcd;
+}
+td.details_teacher_name_even {
+    font-weight: bold;
+    background-color: #ececec;
+}
+td.details_teacher_name_odd {
+    font-weight: bold;
+    background-color: #cdcdcd;
 }
 table.details_table {
     margin-left: auto;
@@ -165,6 +181,10 @@ table.details_table {
 th.details_th {
     font-size: 80%;
     padding: 4px 20px;
+}
+a.teacher_mail {
+    text-decoration: none;
+    color: #060699;
 }
 
 #tutorial {
