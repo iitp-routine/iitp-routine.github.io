@@ -85,3 +85,34 @@ const ROUTINE= {
         '6': [],
     },
 }
+
+
+const COURSE_NAMES= {
+    CS541: {
+        name: `Foundations of Computer systems`,
+    },
+    MA501: {
+        name: `Probablity Statistics and Stochastic process`,
+    },
+    CS559: {
+        name: `Computer systems lab - 1`,
+    },
+    CS544: {
+        name: `Introduction to Network science`,
+    },
+    CS547: {
+        name: `Foundation of Computer security`,
+    },
+    CS555: {
+        name: `Big data computing`,
+    },
+    CS561: {
+        name: `Artificial Intelligence`,
+    },
+    CS564: {
+        name: `Foundation of Machine Learning`,
+    },
+    CS577: {
+        name: `Introduction to Blockchain and Cryptocurrency`,
+    },
+}

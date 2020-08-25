@@ -116,11 +116,11 @@ function render_new_routine(routine_array) {
             })
 
             if(no_of_subs_this_hour == 0) {
-                table_str+= `<td></td>`;
+                table_str+= `<td class="sub"></td>`;
             } else if(no_of_subs_this_hour == 1) {
-                table_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code_this_hour)}">${subjects_name_this_hour}</td>`;
+                table_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code_this_hour)} sub">${subjects_name_this_hour}</td>`;
             } else {
-                table_str+= `<td class="multiple_subjects">${subjects_name_this_hour}</td>`;
+                table_str+= `<td class="multiple_subjects sub">${subjects_name_this_hour}</td>`;
             }
             
         }
@@ -135,6 +135,31 @@ function render_new_routine(routine_array) {
 }
 
 
+function render_routine_details() {
+    let table_str= `<tr><th class="details_th">Subject Code</th><th class="details_th">Subject Name</th></tr>`;
+    let total_subs_details_found= 0;
+    selected_subjects.forEach((subject_code => {
+        if(COURSE_NAMES[subject_code]) {
+            total_subs_details_found++;
+
+            let new_str= `<tr>`;
+            new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_code details_td">${subject_code}</td>`;
+            new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_name details_td">${COURSE_NAMES[subject_code].name}</td>`;
+            new_str+= `</tr>`;
+
+            table_str+= new_str;
+        }
+    }))
+
+    let routine_details_container= document.getElementById("routine_details_container");
+
+    if(total_subs_details_found) {
+        routine_details_container.innerHTML=`<br /><div class="descript_title">Subject details</div><table class="details_table">${table_str}</table>`;
+    } else {
+        routine_details_container.innerHTML= "";
+    }
+}
+
 
 
 
@@ -146,6 +171,8 @@ function render_everything() {
 
     let routine_array= create_new_routine_array();
     render_new_routine(routine_array);
+
+    render_routine_details();
 
 }
 

@@ -60,7 +60,7 @@ option {
     padding: 15px;
 }
 
-td {
+td.sub {
     padding: 10px;
     font-weight: bold;
     border: solid;
@@ -141,6 +141,30 @@ td.multiple_subjects{
     background-color: #ff94a9;
     color: #fff;
     animation: glow_err 2s ease-in-out 0s infinite alternate;
+}
+
+
+td.details_td {
+    padding: 5px 10px;
+    border: 1px solid;
+
+}
+td.details_sub_code {
+    font-family: terminal;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+td.details_sub_name {
+    font-weight: bold;
+    background-color: #dedede;
+}
+table.details_table {
+    margin-left: auto;
+    margin-right: auto;
+}
+th.details_th {
+    font-size: 80%;
+    padding: 4px 20px;
 }
 
 #tutorial {
