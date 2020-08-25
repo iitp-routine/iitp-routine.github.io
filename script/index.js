@@ -3,7 +3,7 @@
 let selected_subjects= [];
 let all_aviable_subjects= [];
 
-function add_available_subjects_to_selection() {
+function add_available_subjects_to_selection(show_sub_name) {
     let available_subjects= [];
     for(let day in ROUTINE) {
         let todays_routine= ROUTINE[day];
@@ -21,10 +21,22 @@ function add_available_subjects_to_selection() {
     available_subjects.sort((a, b) => a.localeCompare(b))
 
     let selection_area= document.getElementById("add_subject_selection");
+    selection_area.innerHTML= "";
+
+    var choose_option= document.createElement("option");
+    choose_option.text= "Choose a Subject";
+    choose_option.disabled= `disabled`;
+    choose_option.selected= `selected`;
+    selection_area.add(choose_option);
+
     available_subjects.forEach((subject_code) => {
 
         var option= document.createElement("option");
-        option.text= subject_code;
+        if(show_sub_name && COURSE_NAMES[subject_code] ) {
+            option.text= `${subject_code} - ${COURSE_NAMES[subject_code].name}`;
+        } else {
+            option.text= subject_code;
+        }
         option.value= subject_code;
         selection_area.add(option);
 
@@ -262,8 +274,17 @@ function remove_subject_from_url(sub) {
 }
 
 
-window.addEventListener('load', (e)=> {
+document.getElementById("show_subject_name_in_add").addEventListener("change", e=> {
+    if(e.target.checked) {
+        all_aviable_subjects= add_available_subjects_to_selection(true);
+    } else {
+        all_aviable_subjects= add_available_subjects_to_selection(false);
+    }
 
+})
+
+
+window.addEventListener('load', (e)=> {
     
     all_aviable_subjects= add_available_subjects_to_selection();
 
@@ -282,7 +303,6 @@ window.addEventListener('load', (e)=> {
         }
     })
 
-    render_everything();
-    
+    render_everything();  
 })
 

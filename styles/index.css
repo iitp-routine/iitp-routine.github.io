@@ -14,7 +14,7 @@
     margin: 0px;
     padding: 0px;
     font-family: lora;
-    text-align: center;/
+    text-align: center;
 }
 
 body {
@@ -56,6 +56,21 @@ body {
     font-weight: bolder;
     padding: 15px;
     text-align: center;
+}
+
+.show_subject_name_container {
+    font-size: 70%;
+    text-decoration: none;
+    color: #060699;
+}
+input#show_subject_name_in_add {
+    padding: 5px;
+    height: 16px;
+    width: 16px;
+    border: 2px solid #555555;
+    background-color: white;
+    cursor: pointer;
+    content: "";
 }
 
 option, select {
