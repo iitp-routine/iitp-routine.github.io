@@ -3,6 +3,8 @@
 let selected_subjects= [];
 let all_aviable_subjects= [];
 
+let pallet_colors= ['#cfffe8', '#e9ffcf', '#ffdfc9', '#c7effc', '#c7cafc', '#ffc2df', '#ffbdf9', '#c3bdff', '#9effad', '#faff9e', 'ff9ca9', '#f292f7', '#89fa93', '#fcab8d', '#ff8c8c', '#849efa', '#b682fa', '#82fa9e', '#f78393', '#f5c47f'];
+
 function add_available_subjects_to_selection(show_sub_name) {
     let available_subjects= [];
     for(let day in ROUTINE) {
@@ -10,7 +12,7 @@ function add_available_subjects_to_selection(show_sub_name) {
         for(let current_hour in todays_routine) {
             let current_hour_subjects= todays_routine[current_hour];
             for(let i=0; i<current_hour_subjects.length; i++) {
-                let subject_name= current_hour_subjects[i];
+                let subject_name= current_hour_subjects[i].split('+')[0];
                 if(!available_subjects.includes(subject_name)) {
                     available_subjects.push(subject_name);
                 }
@@ -69,8 +71,8 @@ function create_new_routine_array() {
 
     let routine_array= [];
 
-    let days= ['mon', 'tue', 'wed', 'thu', 'fri'];
-    let times= ['8', '9', '10', '11', '12', '2', '3', '4', '5', '6'];
+    let days= ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    let times= ['8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6'];
 
     days.forEach(day => {
         let todays_routine= [];
@@ -78,9 +80,20 @@ function create_new_routine_array() {
             let selected_subjects_this_hour= [];
             selected_subjects.forEach(subject_code => {
                 let all_subjects_this_hour= ROUTINE[day][time];
-                if(all_subjects_this_hour.includes(subject_code)) {
-                    selected_subjects_this_hour.push(subject_code);
-                }
+
+                all_subjects_this_hour.forEach(subject_this_hour => {
+                    let special_time_of_subject_code= subject_this_hour.split('+')[1];
+                    if(special_time_of_subject_code) {
+                        subject_this_hour= subject_this_hour.split('+')[0];
+                    }
+                    if(subject_code == subject_this_hour) {
+                        if(special_time_of_subject_code) {
+                            selected_subjects_this_hour.push(subject_code+'+'+special_time_of_subject_code);
+                        } else {
+                            selected_subjects_this_hour.push(subject_code);
+                        }
+                    }
+                })
             });
             todays_routine.push(selected_subjects_this_hour);
         })
@@ -93,12 +106,10 @@ function create_new_routine_array() {
 
 
 
-
-
 function render_new_routine(routine_array) {
 
-    let days= ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-    let times= ['8', '9', '10', '11', '12', '2', '3', '4', '5', '6'];
+    let days= ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    let times= ['8', '9', '10', '11', '12', '1', '2', '3', '4', '5', '6'];
 
     let table_str= "";
 
@@ -110,7 +121,10 @@ function render_new_routine(routine_array) {
 
     for(let i=0; i<days.length; i++) {
 
-        table_str+=`<tr><th>${days[i]}</th>`;
+        let this_line_str= "";
+        let no_of_subjects_today= 0;
+
+        this_line_str+=`<tr><th>${days[i]}</th>`;
 
         for(let j=0; j<times.length; j++) {
             let no_of_subs_this_hour= 0;
@@ -118,7 +132,13 @@ function render_new_routine(routine_array) {
             
             let all_subjects_now= routine_array[i][j];
             let subject_code_this_hour="";
+            let special_timing=undefined;
             all_subjects_now.forEach(subject_code => {
+                no_of_subjects_today++;
+                if(subject_code.split('+')[1]) {
+                    special_timing= subject_code.split('+')[1];
+                    subject_code= subject_code.split('+')[0]
+                }
                 if(no_of_subs_this_hour > 0) {
                     subjects_name_this_hour+=',';
                 }
@@ -128,15 +148,25 @@ function render_new_routine(routine_array) {
             })
 
             if(no_of_subs_this_hour == 0) {
-                table_str+= `<td class="sub"></td>`;
+                this_line_str+= `<td class="sub"></td>`;
+            } else if(special_timing) {
+                this_line_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code_this_hour)} sub special_timing ${special_timing}">${subjects_name_this_hour}</td>`;
             } else if(no_of_subs_this_hour == 1) {
-                table_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code_this_hour)} sub">${subjects_name_this_hour}</td>`;
+                this_line_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code_this_hour)} sub ">${subjects_name_this_hour}</td>`;
             } else {
-                table_str+= `<td class="multiple_subjects sub">${subjects_name_this_hour}</td>`;
+                this_line_str+= `<td class="multiple_subjects sub">${subjects_name_this_hour}</td>`;
             }
             
         }
-        table_str+='</tr>';
+        this_line_str+='</tr>';
+
+        if(days[i] == 'Sun' || days[i] == 'Sat') {
+            if(no_of_subjects_today>0) {
+                table_str+= this_line_str;
+            }
+        } else {
+            table_str+= this_line_str;
+        }
     }
 
     let routine_table_container= document.getElementById("routine_table_container");
@@ -190,6 +220,25 @@ function render_routine_details() {
 
 
 
+function fix_color_for_special_timings() {
+    let special_timing_components= document.getElementsByClassName('special_timing');
+    for(let i=0; i<special_timing_components.length; i++) {
+        let element= special_timing_components[i];
+        let pallet_name= element.className.split(' ')[0];
+        let special_time= element.className.split(' ')[3];
+        let pallet_id= parseInt(pallet_name.split('_')[1]);
+
+        if(special_time == '_0-5_') {
+            element.style.background= `linear-gradient(to right, ${pallet_colors[pallet_id]} 48%, #777 50%, #dedede 51%)`
+            element.style.textAlign= `left`;
+        } else if(special_time == '_5-0_') {
+            element.style.background= `linear-gradient(to right, #dedede 50%, #777 51%, ${pallet_colors[pallet_id]} 53%)`
+            element.style.textAlign= `right`;
+        }  
+    }
+}
+
+
 
 function render_everything() {
 
@@ -201,6 +250,8 @@ function render_everything() {
     render_new_routine(routine_array);
 
     render_routine_details();
+
+    fix_color_for_special_timings();
 
 }
 
