@@ -3,7 +3,7 @@
 let selected_subjects= [];
 let all_aviable_subjects= [];
 
-let pallet_colors= ['#cfffe8', '#e9ffcf', '#ffdfc9', '#c7effc', '#c7cafc', '#ffc2df', '#ffbdf9', '#c3bdff', '#9effad', '#faff9e', 'ff9ca9', '#f292f7', '#89fa93', '#fcab8d', '#ff8c8c', '#849efa', '#b682fa', '#82fa9e', '#f78393', '#f5c47f'];
+let pallet_colors= ['#cfffe8', '#e9ffcf', '#ffdfc9', '#c7effc', '#c7cafc', '#ffafa1', '#ffbdf9', '#c3bdff', '#9effad', '#faff9e', 'ff9ca9', '#f292f7', '#89fa93', '#fcab8d', '#ffc2df', '#849efa', '#b682fa', '#82fa9e', '#f78393', '#f5c47f'];
 
 function add_available_subjects_to_selection(show_sub_name) {
     let available_subjects= [];
