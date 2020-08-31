@@ -1,5 +1,4 @@
 
-const update_date= '32/08/2020-12.13am';
 const ROUTINE= {
     "sun": {
         '8': [],

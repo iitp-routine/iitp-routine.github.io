@@ -336,8 +336,6 @@ document.getElementById("show_subject_name_in_add").addEventListener("change", e
 
 
 window.addEventListener('load', (e)=> {
-
-    console.log(update_date);
     
     all_aviable_subjects= add_available_subjects_to_selection();
 
