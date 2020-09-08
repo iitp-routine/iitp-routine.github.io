@@ -120,11 +120,20 @@ function render_new_routine(routine_array) {
     table_str+= `</tr>`;
 
     for(let i=0; i<days.length; i++) {
-
         let this_line_str= "";
         let no_of_subjects_today= 0;
 
-        this_line_str+=`<tr><th>${days[i]}</th>`;
+        let date= new Date()
+        let week_day= date.getDay();
+        if(date.getHours() > 19) {
+            week_day= (week_day+1)%7;
+        }
+        let today_is_the_day= "";
+        if(week_day == i) {
+            today_is_the_day= "today";
+        }
+
+        this_line_str+=`<tr><th class= "${today_is_the_day}">${days[i]}</th>`;
 
         for(let j=0; j<times.length; j++) {
             let no_of_subs_this_hour= 0;
@@ -148,11 +157,11 @@ function render_new_routine(routine_array) {
             })
 
             if(no_of_subs_this_hour == 0) {
-                this_line_str+= `<td class="sub"></td>`;
+                this_line_str+= `<td class="sub ${today_is_the_day} "></td>`;
             } else if(special_timing) {
                 this_line_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code_this_hour)} sub special_timing ${special_timing}">${subjects_name_this_hour}</td>`;
             } else if(no_of_subs_this_hour == 1) {
-                this_line_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code_this_hour)} sub ">${subjects_name_this_hour}</td>`;
+                this_line_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code_this_hour)} sub ${today_is_the_day} ">${subjects_name_this_hour}</td>`;
             } else {
                 this_line_str+= `<td class="multiple_subjects sub">${subjects_name_this_hour}</td>`;
             }

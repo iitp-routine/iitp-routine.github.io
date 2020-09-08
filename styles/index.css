@@ -4,6 +4,20 @@
     100% {background-color: #cf3862; border-color: #c30ac9; border-radius: 10px;}
 }
 
+@keyframes today_name {
+    0% {transform: rotate(20deg);}
+    10% {transform: rotate(10deg);}
+    20% {transform: rotate(15deg);}
+    30% {transform: rotate(-10deg);}
+    40% {transform: rotate(20deg);}
+    50% {transform: rotate(5deg);}
+    60% {transform: rotate(15deg);}
+    70% {transform: rotate(-10deg);}
+    80% {transform: rotate(10deg);}
+    90% {transform: rotate(5deg);}
+    100% {transform: rotate(-20deg);}
+}
+
 @font-face {
     font-family: terminal;
     src: url('./../res/terminal_bold.ttf');
@@ -163,6 +177,18 @@ td.multiple_subjects{
     animation: glow_err 2s ease-in-out 0s infinite alternate;
 }
 
+td.today {
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+th.today {
+    color: #aa2244;
+    font-size: 130%;
+    font-family: terminal;
+    animation: today_name 1.5s ease-in-out 0s infinite alternate;
+}
 
 td.details_td {
     padding: 5px 10px;
