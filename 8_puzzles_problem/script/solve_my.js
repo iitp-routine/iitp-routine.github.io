@@ -324,30 +324,6 @@ function best_first(heuristic_distance_algo, puzzle_arr, size) {
 
 }
 
-function main() {
-
-	// breath_first(undefined, make_simple_puzzle_array(), PUZZLE_SIZE);
-
-	// best_first(get_misplaced_tiles_number, make_simple_puzzle_array(), 3);
-	
-
-
-	try{
-
-
-
-		best_first(get_manhatan_distance, make_simple_puzzle_array(), 3);
-
-
-
-
-	} catch(e){
-
-		console.warn(e);
-		console.log("\n\n\n___________________________\nDIDN'T Work...");
-	}
-}
-
 
 function run_best_first_with(heuristic_algorithm_name) {
 
@@ -371,3 +347,110 @@ function run_best_first_with(heuristic_algorithm_name) {
 }
 
 
+
+function a_strics(heuristic_distance_algo, puzzle_arr, size) {
+
+
+
+	let moves= ["up", "left", "down", "right"];
+
+	let initial_state= new puzzle_state(puzzle_arr, size, [], "", 0+heuristic_distance_algo(puzzle_arr, size));
+
+	let q= new priority_queue((a, b) => {
+		return a.heuristic_distance-b.heuristic_distance;
+	});
+
+	let visit_history= new old_state_history();
+
+	q.enque(initial_state);
+
+	while(q.length) {
+		let current_state= q.deque();
+
+
+		if(visit_history.has_seen(current_state.puzzle_array_as_string)) {
+			continue;
+		}
+
+		visit_history.add(current_state.puzzle_array_as_string);
+
+		if(current_state.is_wining_state()) {
+			console.log("\n\n--- WON ---\n\n");
+			console.log(current_state);
+			// console.log(current_state.played_moves);
+			let moves_str= "";
+			current_state.played_moves.forEach(e => moves_str+=e+', ');
+			console.warn("\n", moves_str, "\n\n");
+			console.log("\nTotoal_moves: ", current_state.played_moves.length);
+			play_moves_from_array(current_state.played_moves);
+			return;
+		}
+
+		console.log(q.length());
+
+		moves.forEach((move, move_index) => {
+			if(moves[(move_index+2)%4] == current_state.last_move) {
+				return;
+			}
+			if(!is_valid_move(move, current_state.puzzle_arr, size)) {
+				return;
+			}
+
+			let next_puzzle_array= move_blank(move, current_state.puzzle_arr, size);
+			let goal_distance= heuristic_distance_algo(next_puzzle_array, size)+current_state.played_moves.length;
+			let new_state= new puzzle_state(next_puzzle_array, size, current_state.played_moves, move, goal_distance);
+			q.enque(new_state);
+		})
+	}
+
+
+}
+
+
+function run_a_strics_with(heuristic_algorithm_name) {
+
+	currently_solving= true;
+
+	try {
+		if(heuristic_algorithm_name == "md") {
+			a_strics(get_manhatan_distance, make_simple_puzzle_array(), PUZZLE_SIZE);
+		}
+		else if(heuristic_algorithm_name == "mtc") {
+			a_strics(get_misplaced_tiles_number, make_simple_puzzle_array(), PUZZLE_SIZE);
+		}
+		else console.error("unkmown heuristics algo- ",heuristic_algorithm_name);
+	}
+	catch(e) {
+		console.warn(e);
+		console.log("\n\n\n___________________________\nDIDN'T Work...");
+	}
+
+	currently_solving= false;
+}
+
+
+
+
+function main() {
+
+	// breath_first(undefined, make_simple_puzzle_array(), PUZZLE_SIZE);
+
+	// best_first(get_misplaced_tiles_number, make_simple_puzzle_array(), 3);
+	
+
+
+	try{
+
+
+
+		best_first(get_manhatan_distance, make_simple_puzzle_array(), 3);
+
+
+
+
+	} catch(e){
+
+		console.warn(e);
+		console.log("\n\n\n___________________________\nDIDN'T Work...");
+	}
+}

@@ -367,7 +367,7 @@ function set_button_listeners() {
         if(algo== "bf") {
             run_best_first_with(heuristics);
         } else {
-            alert("didnot implemented yet...");
+            run_a_strics_with(heuristics);
         }
 
 

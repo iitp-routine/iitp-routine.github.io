@@ -56,3 +56,17 @@ body {
     background-color: #cddede;
     z-index: 1;
 }
+
+select {
+    padding: 10px 15px;
+    size: 130%;
+    margin: 5px;
+
+}
+
+button {
+    padding: 8px 15px;
+    size: 120%;
+    background-color: #9fff94;
+    border-radius: 5px
+}
