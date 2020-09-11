@@ -1,0 +1,36 @@
+<!-- <!DOCTYPE html> -->
+<html>
+<head>
+    <meta charset="UTF-8">
+	<title>
+		8_puzzle
+	</title>
+	<link href="styles/index.css?v=1" type="text/css" rel="stylesheet" />
+	<link rel="icon" href="res/favicon.ico">
+</head>
+
+
+<body>
+
+    <h1 id="page_title">
+        8_Puzzle
+    </h1>
+    <div>
+    	<select id="algo">
+    		<option value="bf">Best First</option>
+    		<option value="as">A*</option>
+    	</select>
+    	<select id="heuristics">
+    		<option value="md">Manhatan Dist.</option>
+    		<option value="mtc">Misplaced tiles count</option>
+    	</select>
+    	<button id="run_btn"> Run </button>
+    	<br /><button id="randomize_btn">Randomize</button>
+    </div>
+    <div id="game_container"></div>
+
+</body>
+<script type="text/javascript" src="script/index.js?v=1"></script>
+<!-- <script type="text/javascript" src="script/solve.js?v=1"></script> -->
+<script type="text/javascript" src="script/solve_my.js?v=1"></script>
+</html>
