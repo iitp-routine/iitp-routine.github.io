@@ -43,14 +43,14 @@ body {
     z-index: 2;
 }
 
-.non_empty_tile:active {
+/*.non_empty_tile:active {
     transition: .0s;
     background-color: #83a3a1;
     border-color: #60918e;
     border: inset;
     border-width: 3px;
 
-}
+}*/
 
 .empty_tile {
     background-color: #cddede;
