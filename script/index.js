@@ -189,34 +189,77 @@ function render_new_routine(routine_array) {
 function render_routine_details() {
     let table_str= `<tr><th class="details_th">Subject Code</th><th class="details_th">Subject Name</th><th class="details_th">Teacher</th></tr>`;
     let total_subs_details_found= 0;
-    selected_subjects.forEach((subject_code => {
+    // selected_subjects.forEach((subject_code => {
+    //     if(COURSE_NAMES[subject_code]) {
+    //         total_subs_details_found++;
+
+    //         let new_str= `<tr>`;
+    //         new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_code details_td">${subject_code}</td>`;
+
+    //         if(COURSE_NAMES[subject_code].name) {
+    //             new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_name_${total_subs_details_found%2==0?"even":"odd"} details_td">${COURSE_NAMES[subject_code].name}</td>`;
+    //         } else {
+    //             new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_name_${total_subs_details_found%2==0?"even":"odd"} details_td"></td>`;
+    //         }
+
+    //         if(COURSE_NAMES[subject_code].teacher_name) {
+    //             if(COURSE_NAMES[subject_code].teacher_email) {
+    //                 new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td"><a class="teacher_mail" href="mailto:${COURSE_NAMES[subject_code].teacher_email}">${COURSE_NAMES[subject_code].teacher_name}</a></td>`;
+    //             } else {
+    //                 new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td">${COURSE_NAMES[subject_code].teacher_name}</td>`;
+    //             }
+    //         } else {
+    //             new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td"></td>`;
+    //         }
+            
+    //         new_str+= `</tr>`;
+
+    //         table_str+= new_str;
+    //     }
+    // }))
+
+    selected_subjects.forEach(subject_code => {
         if(COURSE_NAMES[subject_code]) {
             total_subs_details_found++;
+            if(!COURSE_NAMES[subject_code].name) return;
 
-            let new_str= `<tr>`;
-            new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_code details_td">${subject_code}</td>`;
-
-            if(COURSE_NAMES[subject_code].name) {
+            //if no teachers for subject
+            if(!COURSE_NAMES[subject_code].teachers || !COURSE_NAMES[subject_code].teachers.length) {
+                let new_str= `<tr>`;
+                new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_code details_td">${subject_code}</td>`;
                 new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_name_${total_subs_details_found%2==0?"even":"odd"} details_td">${COURSE_NAMES[subject_code].name}</td>`;
-            } else {
-                new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_name_${total_subs_details_found%2==0?"even":"odd"} details_td"></td>`;
+                new_str+= `</tr>`;
+                table_str+= new_str;
+                return;
             }
 
-            if(COURSE_NAMES[subject_code].teacher_name) {
-                if(COURSE_NAMES[subject_code].teacher_email) {
-                    new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td"><a class="teacher_mail" href="mailto:${COURSE_NAMES[subject_code].teacher_email}">${COURSE_NAMES[subject_code].teacher_name}</a></td>`;
-                } else {
-                    new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td">${COURSE_NAMES[subject_code].teacher_name}</td>`;
+            COURSE_NAMES[subject_code].teachers.forEach(short_name => {
+                let new_str= `<tr>`;
+                new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_code details_td">${subject_code}</td>`;
+                new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_sub_name_${total_subs_details_found%2==0?"even":"odd"} details_td">${COURSE_NAMES[subject_code].name}</td>`;
+
+                let teacher_name= short_name;
+                let teacher_email= null;
+
+                FACULTY.forEach(teacher => {
+                    if(teacher.short_name == short_name) {
+                        teacher_name= teacher.name;
+                        teacher_email= teacher.email;
+                    }
+                })
+                if(!teacher_email) {
+                    new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td">${teacher_name}</td>`;
                 }
-            } else {
-                new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td"></td>`;
-            }
-            
-            new_str+= `</tr>`;
+                 else {
+                    new_str+= `<td class="pallet_${selected_subjects.indexOf(subject_code)} details_teacher_name_${total_subs_details_found%2==0?"even":"odd"} details_td"><a class="teacher_mail" href="mailto:${teacher_email}">${teacher_name}</a></td>`;
+                }
 
-            table_str+= new_str;
+                new_str+= `</tr>`;
+                table_str+= new_str;
+            })
+
         }
-    }))
+    })
 
     let routine_details_container= document.getElementById("routine_details_container");
 
@@ -362,6 +405,12 @@ window.addEventListener('load', (e)=> {
             }
         }
     })
+
+
+
+    //show subject names by default
+    document.getElementById("show_subject_name_in_add").checked = true;
+    add_available_subjects_to_selection(true);
 
     render_everything();
 })
