@@ -1,5 +1,5 @@
 
-const ROUTINE= {
+const ROUTINE_CS= {
     "sun": {
         '8': [],
         '9': [],
@@ -98,7 +98,140 @@ const ROUTINE= {
     },
 }
 
+const ROUTINE_MC= {
+    "sun": {
+        '8': [],
+        '9': [],
+        '10': [],
+        '11': [],
+        '12': [],
+        '1': [],
+        '2': [],
+        '3': [],
+        '4': [],
+        '5': [],
+        '6': [],
+    },
+    "mon": {
+        '8': [],
+        '9': [],
+        '10': ['MA428'],
+        '11': ['MA430'],
+        '12': ['MA424'],
+        '1': [],
+        '2': ['MA536'],
+        '3': ['MA524'],
+        '4': ['MA522'],
+        '5': ['MA528'],
+        '6': [],
+    },
+    "tue": {
+        '8': [],
+        '9': ['MA225'],
+        '10': ['MA424'],
+        '11': ['MA430'],
+        '12': ['MA424'],
+        '1': [],
+        '2': ['MA538'],
+        '3': ['MA538'],
+        '4': ['MA536', 'MA423'],
+        '5': ['MA528', 'MA422'],
+        '6': ['MA504'],
+    },
+    "wed": {
+        '8': [],
+        '9': [],
+        '10': ['MA225'],
+        '11': ['MA430'],
+        '12': ['MA424'],
+        '1': [],
+        '2': ['MA522'],
+        '3': ['MA423Lab'],
+        '4': ['MA423Lab'],
+        '5': ['MA634', 'MA422'],
+        '6': ['MA504'],
+    },
+    "thu": {
+        '8': [],
+        '9': [],
+        '10': [],
+        '11': ['MA225', 'MA430'],
+        '12': ['MA502', 'MA424'],
+        '1': [],
+        '2': ['MA524'],
+        '3': ['MA536', 'MA422'],
+        '4': ['MA538', 'MA423'],
+        '5': ['MA528', 'MA528'],
+        '6': ['MA504'],
+    },
+    "fri": {
+        '8': [],
+        '9': [],
+        '10': ['MA502', 'MA428'],
+        '11': ['MA423'],
+        '12': ['MA225'],
+        '1': [],
+        '2': ['MA634'],
+        '3': ['MA522'],
+        '4': ['MA524'],
+        '5': ['MA538', 'MA422'],
+        '6': [],
+    },
+    "sat": {
+        '8': [],
+        '9': [],
+        '10': [],
+        '11': [],
+        '12': [],
+        '1': [],
+        '2': [],
+        '3': [],
+        '4': [],
+        '5': [],
+        '6': [],
+    },
+}
 
+
+let ROUTINE= {}
+
+// const valid_routines= [ROUTINE_CS, ROUTINE_MC]
+
+function make_routine_for(routines_array) { // shall be [ROUTINE_CS] for cs routine
+    ROUTINE= {};
+    let days= ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    let times= ['8','9','10','11','12','1','2','3','4','5','6'];
+
+    days.forEach(day => {
+        ROUTINE[day]= {};
+        times.forEach(time =>{
+            ROUTINE[day][time]= [];
+            routines_array.forEach(routine => {
+                if(! routine[day] || !routine[day][time]) return;
+                ROUTINE[day][time]= ROUTINE[day][time].concat(routine[day][time])
+            })
+        })
+    })
+
+}
+
+function marge_routines(routines_array) { // shall be [ROUTINE_CS] for cs routine
+    res= {};
+    let days= ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    let times= ['8','9','10','11','12','1','2','3','4','5','6'];
+
+    days.forEach(day => {
+        res[day]= {};
+        times.forEach(time =>{
+            res[day][time]= [];
+            routines_array.forEach(routine => {
+                if(! routine[day] || !routine[day][time]) return;
+                res[day][time]= res[day][time].concat(routine[day][time])
+            })
+        })
+    })
+    return res;
+}
 
 
 const FACULTY= [
@@ -297,6 +430,75 @@ const COURSE_NAMES= {
         name: `Data Structures & Algorithm Lab`,
         teachers: ['ABM'],
     },
+
+
+
+    // for mc subjects
+
+    MA225: {
+        name: `Maths`,
+        teachers: ['YMT', 'SP'],
+    },
+    MA502: {
+        name: `Maths`,
+        teachers: ['NKT', 'BBU'],
+    },
+    MA424: {
+        name: `Maths`,
+        teachers: ['SKT', 'PD'],
+    },
+    MA430: {
+        name: `Maths`,
+        teachers: ['PD'],
+    },
+    MA428: {
+        name: `Maths`,
+        teachers: ['AKY'],
+    },
+    MA538: {
+        name: `Maths`,
+        teachers: ['YMT'],
+    },
+    MA634: {
+        name: `Maths`,
+        teachers: ['BBU'],
+    },
+    MA536: {
+        name: `Maths`,
+        teachers: ['OP'],
+    },
+    MA423: {
+        name: `Maths`,
+        teachers: ['SP'],
+    },
+    MA528: {
+        name: `Maths`,
+        teachers: ['RKS'],
+    },
+    MA422: {
+        name: `Maths`,
+        teachers: ['KS', 'AKY'],
+    },
+    MA504: {
+        name: `Maths`,
+        teachers: ['PKS'],
+    },
+    MA522: {
+        name: `Maths`,
+        teachers: ['KS'],
+    },
+    MA524: {
+        name: `Maths`,
+        teachers: ['RKS'],
+    },
+    MA423Lab: {
+        name: `Maths`,
+        teachers: ['SP'],
+    },
+
+
+
+
 
 }
 

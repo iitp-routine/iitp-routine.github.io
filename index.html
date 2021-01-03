@@ -5,7 +5,7 @@
 	<title>
 		IITP Routine
 	</title>
-	<link href="styles/index.css?v=2" type="text/css" rel="stylesheet" />
+	<link href="styles/index.css?v=3" type="text/css" rel="stylesheet" />
 	<link rel="icon" href="res/favicon.ico">
 </head>
 
@@ -26,7 +26,7 @@
 
         <div id="new_select">
             <div class="descript_title">
-                Add a Subject <lebel class="show_subject_name_container">( <input type="checkbox" id="show_subject_name_in_add" /> Show subject names )</lebel>
+                Add a Subject <lebel class="show_subject_name_container" id= "show_subject_name_container">( <input type="checkbox" id="show_subject_name_in_add" /> Show names )</lebel><lebel class="show_mc_container" id="show_mc_container"> ( <input type="checkbox" id="show_mc_subjects" /> Show M&C subs)</lebel>
             </div>
             <select name="add_subject" id="add_subject_selection"> </select>
         </div>
@@ -42,10 +42,11 @@
         </div>
             <ul>
                 <li>Select subjects you choosed in this sem and It should create a routine.</li>
-                <li>Routine is based on <a href="res/routine.pdf">shared pdf from the institude</a>.</li>
+                <li>Routine is based on shared doc of <a href="res/routine_cs_2.xlsx"> CS </a> and <a href="res/routine_mc_2.docx"> M&C </a>.</li>
                 <li>To remove a subject, click on the subject code in selected subjects. </li>
-                <li>The page can be shared or bookmarked. All the selected subjects will be saved in the url.</li>
+                <li>The page can be shared or bookmarked. All the selected subjects will be saved in the url. <a href="https://iitp-routine.github.io/?subs=CS508_CS511_CS514_CS515_CS551_CS563_CS592">Example</a></li>
                 <li>All subject names are not available to me. If you want to add one, <a href="mailto:johnchakder@gmail.com?subject=Routine_maker_github__add_sub">mail me</a> the details.</li>
+                <li>If you want, you can edit the routine by yourself. Just <a href="https://github.com/iitp-routine/iitp-routine.github.io" target="_blank">fork this repository</a>, edit the script/routine_data.js file, and request for pull. </li>
                 <li>Any bugs or suggestions can be sent at <a href="mailto:johnchakder@gmail.com?subject=Routine_maker_github__suggestion">johnchakder@gmail.com</a></li>
             </ul>  
         
@@ -54,6 +55,6 @@
 
 
 </body>
-<script type="text/javascript" src="./script/routine_data.js?v=4"></script>
-<script type="text/javascript" src="script/index.js?v=4"></script>
+<script type="text/javascript" src="./script/routine_data.js?v=5"></script>
+<script type="text/javascript" src="script/index.js?v=5"></script>
 </html>

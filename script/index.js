@@ -3,6 +3,8 @@
 let selected_subjects= [];
 let all_aviable_subjects= [];
 
+let full_routine= {};
+
 let pallet_colors= ['#cfffe8', '#e9ffcf', '#ffdfc9', '#c7effc', '#c7cafc', '#ffafa1', '#ffbdf9', '#c3bdff', '#9effad', '#faff9e', 'ff9ca9', '#f292f7', '#89fa93', '#fcab8d', '#ffc2df', '#849efa', '#b682fa', '#82fa9e', '#f78393', '#f5c47f'];
 
 function add_available_subjects_to_selection(show_sub_name) {
@@ -47,6 +49,27 @@ function add_available_subjects_to_selection(show_sub_name) {
 }
 
 
+function get_all_available_subjects(routine_array) {
+    let available_subjects= [];
+    routine_array.forEach(routine => {
+        for(let day in routine) {
+            let todays_routine= routine[day];
+            for(let current_hour in todays_routine) {
+                let current_hour_subjects= todays_routine[current_hour];
+                for(let i=0; i<current_hour_subjects.length; i++) {
+                    let subject_name= current_hour_subjects[i].split('+')[0];
+                    if(!available_subjects.includes(subject_name)) {
+                        available_subjects.push(subject_name);
+                    }
+                }
+            }
+        }
+    })
+    available_subjects.sort((a, b) => a.localeCompare(b))
+    return available_subjects;
+}
+
+
 
 
 
@@ -79,7 +102,7 @@ function create_new_routine_array() {
         times.forEach(time => {
             let selected_subjects_this_hour= [];
             selected_subjects.forEach(subject_code => {
-                let all_subjects_this_hour= ROUTINE[day][time];
+                let all_subjects_this_hour= full_routine[day][time];
 
                 all_subjects_this_hour.forEach(subject_this_hour => {
                     let special_time_of_subject_code= subject_this_hour.split('+')[1];
@@ -377,19 +400,58 @@ function remove_subject_from_url(sub) {
 }
 
 
+function show_subject_name_in_add_fn(has_to_show) {
+    all_aviable_subjects= add_available_subjects_to_selection(has_to_show);
+}
+
 document.getElementById("show_subject_name_in_add").addEventListener("change", e=> {
-    if(e.target.checked) {
-        all_aviable_subjects= add_available_subjects_to_selection(true);
+    show_subject_name_in_add_fn(e.target.checked);
+}, false)
+
+// document.getElementById("show_subject_name_container").addEventListener("click", e=> {
+//     if(document.getElementById("show_subject_name_in_add").checked) {
+//         document.getElementById("show_subject_name_in_add").checked= false;
+//         show_subject_name_in_add_fn(false);
+//     } else {
+//         document.getElementById("show_subject_name_in_add").checked= true;
+//         show_subject_name_in_add_fn(true);
+//     }
+// }, false)
+
+function show_mc_subjects_fn(has_to_show) {
+    if(has_to_show) {
+        make_routine_for([ROUTINE_CS, ROUTINE_MC]);
     } else {
-        all_aviable_subjects= add_available_subjects_to_selection(false);
+        make_routine_for([ROUTINE_CS]);
     }
 
-})
+    if(document.getElementById("show_subject_name_in_add").checked)
+        all_aviable_subjects= add_available_subjects_to_selection(true);
+    else
+        all_aviable_subjects= add_available_subjects_to_selection(false);
+
+}
+
+document.getElementById("show_mc_subjects").addEventListener("change", e=> {
+    show_mc_subjects_fn(e.target.checked);
+}, false)
+
+// document.getElementById("show_mc_container").addEventListener("click", e=> {
+//     if(document.getElementById("show_mc_subjects").checked) {
+//         document.getElementById("show_mc_subjects").checked= false;
+//         show_mc_subjects_fn(false);
+//     } else {
+//         document.getElementById("show_mc_subjects").checked= true;
+//         show_mc_subjects_fn(true);
+//     }
+// }, false)
 
 
 window.addEventListener('load', (e)=> {
     
-    all_aviable_subjects= add_available_subjects_to_selection();
+    make_routine_for([ROUTINE_CS]);
+    full_routine= marge_routines([ROUTINE_CS, ROUTINE_MC]);
+    all_aviable_subjects= get_all_available_subjects([ROUTINE_CS, ROUTINE_MC]);
 
     let subs_str= new URLSearchParams(window.location.search).get("subs");
     let subs_arr= [];
