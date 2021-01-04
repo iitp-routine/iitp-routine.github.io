@@ -127,7 +127,7 @@ const ROUTINE_MC= {
     },
     "tue": {
         '8': [],
-        '9': ['MA225'],
+        '9': ['MA225','MA502'],
         '10': ['MA424'],
         '11': ['MA430'],
         '12': ['MA424'],
@@ -192,46 +192,6 @@ const ROUTINE_MC= {
     },
 }
 
-
-let ROUTINE= {}
-
-// const valid_routines= [ROUTINE_CS, ROUTINE_MC]
-
-function make_routine_for(routines_array) { // shall be [ROUTINE_CS] for cs routine
-    ROUTINE= {};
-    let days= ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-    let times= ['8','9','10','11','12','1','2','3','4','5','6'];
-
-    days.forEach(day => {
-        ROUTINE[day]= {};
-        times.forEach(time =>{
-            ROUTINE[day][time]= [];
-            routines_array.forEach(routine => {
-                if(! routine[day] || !routine[day][time]) return;
-                ROUTINE[day][time]= ROUTINE[day][time].concat(routine[day][time])
-            })
-        })
-    })
-
-}
-
-function marge_routines(routines_array) { // shall be [ROUTINE_CS] for cs routine
-    res= {};
-    let days= ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-    let times= ['8','9','10','11','12','1','2','3','4','5','6'];
-
-    days.forEach(day => {
-        res[day]= {};
-        times.forEach(time =>{
-            res[day][time]= [];
-            routines_array.forEach(routine => {
-                if(! routine[day] || !routine[day][time]) return;
-                res[day][time]= res[day][time].concat(routine[day][time])
-            })
-        })
-    })
-    return res;
-}
 
 
 const FACULTY= [
@@ -502,3 +462,55 @@ const COURSE_NAMES= {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+let ROUTINE= {}
+
+// const valid_routines= [ROUTINE_CS, ROUTINE_MC]
+
+function make_routine_for(routines_array) { // shall be [ROUTINE_CS] for cs routine
+    ROUTINE= {};
+    let days= ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    let times= ['8','9','10','11','12','1','2','3','4','5','6'];
+
+    days.forEach(day => {
+        ROUTINE[day]= {};
+        times.forEach(time =>{
+            ROUTINE[day][time]= [];
+            routines_array.forEach(routine => {
+                if(! routine[day] || !routine[day][time]) return;
+                ROUTINE[day][time]= ROUTINE[day][time].concat(routine[day][time])
+            })
+        })
+    })
+
+}
+
+function marge_routines(routines_array) { // shall be [ROUTINE_CS] for cs routine
+    res= {};
+    let days= ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+    let times= ['8','9','10','11','12','1','2','3','4','5','6'];
+
+    days.forEach(day => {
+        res[day]= {};
+        times.forEach(time =>{
+            res[day][time]= [];
+            routines_array.forEach(routine => {
+                if(! routine[day] || !routine[day][time]) return;
+                res[day][time]= res[day][time].concat(routine[day][time])
+            })
+        })
+    })
+    return res;
+}
