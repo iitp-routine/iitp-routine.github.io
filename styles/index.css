@@ -251,3 +251,29 @@ a.teacher_mail {
 a {
     text-decoration: none;
 }
+
+
+.sticky_note {
+    background-color: #feff9c;
+    color: #000;
+    font-weight: bold;
+    padding: 20px 10px 10px 10px;
+    border: 2px solid #000;
+    border-radius: 5px 10px 5px 5px;
+    position: fixed;
+    top: 100px;
+    left: 100px;
+}
+
+.sticky_note_cross {
+    background-color: #fff740;
+    color: #000;
+    font-weight: bold;
+    font-family: lora;
+    padding: 3px;
+    border: 2px solid #000;
+    border-radius: 25px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
